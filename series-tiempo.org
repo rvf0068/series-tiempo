@@ -1,0 +1,218 @@
+#+title: Visualización de series de tiempo en Python
+#+author: Erika Elizabeth Rodríguez Torres, Margarita Tetlalmatzi Montiel, Rafael Villarroel Flores
+#+date: junio de 2017
+
+#+options: ':t toc:nil
+
+#+latex_class: padi
+
+#+latex_header: \usepackage{listings}
+#+latex_header: \usepackage{xcolor}
+#+latex_header: \usepackage[spanish,mexico]{babel}
+#+latex: \lstdefinelanguage{ipython}{}
+
+
+* Introducción
+
+   Una /serie de tiempo/ es una sucesión de datos \(X=\{x_{t}\}\),
+   donde la variable \(t\) toma valores uniformemente espaciados en el
+   tiempo. El valor \(x_{t}\) se interpreta como el valor que toma una
+   cantidad a estudiar en el tiempo \(t\). Como se observa en
+   cite:MR3526245, existen diversas aplicaciones de las series de
+   tiempo en la economía, (describiendo los volúmenes de venta de un
+   producto a lo largo del tiempo), a la demografía (cambios en una
+   cierta población), sociología, etc.
+
+   /Python/ es un lenguaje de programación moderno, el cual puede
+   obtenerse legalmente de internet y de manera gratuita. El lenguaje
+   /Python/ se presta de manera natural a las aplicaciones a la
+   ciencia. En este trabajo mostraremos el uso de sus librerías
+   =matplotlib= (la cual sirve para producir dibujos científicos) y
+   =networkx= (la cual ayuda a manipular redes complejas).
+
+   Como un primer ejemplo, en la figura [[simple2]] mostramos una
+   representación gráfica de la serie de tiempo =[2,3,10,2,4,5]=
+   usando =matplotlib=.
+
+   #+name: simple
+   #+BEGIN_SRC ipython :session :file ./ejemplo02.png :exports both
+import matplotlib.pyplot as plt
+y=[2,3,10,2,4,5]
+plt.grid(True)
+plt.plot(y)
+plt.show()
+   #+END_SRC
+
+   #+name: simple2
+   #+caption: Una serie de tiempo simple
+   #+RESULTS: simple
+   [[file:./ejemplo02.png]]
+
+   
+   Sin embargo, para el propósito de definir la gráfica de visibilidad
+   mas adelante, será conveniente usar barras para indicar los valores
+   de la serie de tiempo.
+
+   #+BEGIN_SRC ipython :session :file ./ejemplo03.png :exports both
+import matplotlib.pyplot as plt
+y=[2,3,10,2,4,5]
+plt.grid(True)
+plt.bar(range(len(y)), y, width=0.2, align='center')
+plt.show()
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:./ejemplo03.png]]
+
+
+* Aplicación a la gráfica de visibilidad
+
+** Gráfica de visibilidad 
+
+   En el artículo cite:MR2403096, los autores introducen la gráfica de
+   visibilidad asociada a una serie de tiempo como una herramienta
+   para analizar diversas propiedades de la serie, usando las
+   herramientas y la terminología de la teoría de gráficas. La gráfica
+   de visibilidad tiene como vértices los datos de la serie de
+   tiempo. Se declaran adyacentes entre sí aquellos datos que sean
+   "visibles" entre sí, en el dibujo de la serie de tiempo,
+   considerando a las barras como "paredes". Por ejemplo, un dibujo de
+   la gráfica de visibilidad de la serie de tiempo =[2,3,10,2,4,5]=
+   está dado por:
+
+   #+BEGIN_SRC ipython :session :file ./ejemplo04.png :exports results
+import networkx as nx
+import matplotlib.pyplot as plt
+G=nx.Graph([(0,1),(0,2),(1,2),(2,3),(2,4),(2,5),(3,4),(4,5)])
+nx.draw(G,with_labels=True)
+plt.show()
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:./ejemplo04.png]]
+   
+
+** Definición formal de la gráfica de visibilidad
+   En cite:MR2403096 se describe que los datos \((t_{a},y_{a})\),
+   \((t_{b},y_{b})\) se declaran adyacentes en la gráfica de
+   visibilidad siempre y cuando se tenga que para todos los \(t_{c}\)
+   con \(t_{a}<t_{c}<t_{b}\) se cumple que:
+   \begin{equation}
+   \label{eq:1}
+   y_{c}<y_{b}+(y_{a}-y_{b})\frac{t_{b}-t_{c}}{t_{b}-t_{a}}.
+   \end{equation}
+
+** El mapeo logístico
+
+   #+BEGIN_SRC ipython :session :file ./ejemplo05.png :exports results
+import matplotlib.pyplot as plt
+def f(x):
+    return 3.8*x*(1-x)
+vals=[0.3]
+for i in range(100):
+    new = vals[-1]
+    vals.append(f(new))
+plt.figure(figsize=(10,5))
+plt.axis([-1,101, 0,1])
+plt.grid(True)
+plt.bar(range(len(vals)), vals, width=0.2, align='center')
+plt.show()
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:./ejemplo05.png]]
+
+** Código de la gráfica de visibilidad
+
+   #+BEGIN_SRC ipython :session :exports code
+def is_visible(y,a,b):
+    isit = True
+    c = a+1
+    while isit and c < b:
+        isit = y[c]<y[b]+(y[a]-y[b])*((b-c)/float(b-a))
+        c = c+1
+    return isit
+   #+END_SRC
+
+   #+RESULTS:
+
+
+   #+BEGIN_SRC ipython :session 
+eds = []
+def visibility_graph(ts):
+    for a in range(len(ts)):
+        for b in range(a+1,len(ts)):
+            if is_visible(ts,a,b):
+                eds.append((a,b))
+    return nx.Graph(eds)
+   #+END_SRC
+
+   #+RESULTS:
+
+   #+BEGIN_SRC ipython :session :file ./ejemplo06.png :exports results
+import matplotlib.pyplot as plt
+import networkx as nx
+G=visibility_graph(vals)
+nx.draw(G,with_labels=True)
+plt.show()
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:./ejemplo06.png]]
+
+
+   Un histograma de los grados de la gráfica anterior:
+
+   #+BEGIN_SRC ipython :session :file ./ejemplo07.png :exports results
+import numpy as np
+degs = list(G.degree().values())
+dmax=max(degs)
+bins = np.arange(dmax) - 0.5
+plt.xlim(xmin=-1)
+plt.hist(degs,bins)
+plt.xticks(range(dmax))
+plt.xlabel(u"Grados de los vértices")
+plt.ylabel(u"Cantidad de vértices")
+plt.grid(True)
+plt.show()
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:./ejemplo07.png]]
+
+
+* Ejemplo final
+
+** Fechas
+
+   #+BEGIN_SRC ipython :session :file ./ejemplo01.png :exports both
+import matplotlib.pyplot as plt
+import datetime
+import numpy as np
+
+x = np.array([datetime.datetime(2017, 6, i) for i in range(1,7)])
+#x = [datetime.datetime(2017, 6, i) for i in range(1,7)]
+y = np.random.randint(10, size=x.shape)
+
+plt.grid(True)
+plt.plot(x,y)
+plt.show()
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:./ejemplo01.png]]
+
+
+
+[[bibliography:series.bib]]
+[[bibliographystyle:plain]]
+
+
+
+
+* COMMENT Local Variables
+
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:
