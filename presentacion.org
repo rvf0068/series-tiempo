@@ -1,6 +1,8 @@
 #+title: Visualización de series de tiempo en Python
-#+author: {{{erika}}}, {{{margarita}}}, {{{rafael}}}
+#+author: {{{erika}}}{{{newline}}} {{{margarita}}}{{{newline}}} {{{rafael}}}
+#+date: 6 de julio de 2017
 
+#+macro: newline @@latex:\\[0.6em]@@ @@html:<br>@@
 #+macro: aamf Área Académica de Matemáticas y Física
 #+macro: rafael Rafael Villarroel Flores
 #+macro: rvf {{{rafael}}}\footnote{ {{{rafael}}}. Profesor Investigador del {{{aamf}}}. Autor de correspondencia. Correo electrónico: rafaelv@uaeh.edu.mx}
@@ -30,46 +32,34 @@
 #+latex_header: }
 #+latex_header: \lstalias{ipython}{python}
 
-# #+begin_resumen
-#   Se muestra el uso del lenguaje de programación /Python/ para obtener
-#   representaciones gráficas de series de tiempo. Además se usa
-#   /Python/ para estudiar el concepto de la gráfica de visibilidad de
-#   una serie de tiempo. Los ejemplos mostrados pueden ser útiles en
-#   otros contextos donde pueda aplicarse la programación en problemas
-#   científicos. 
-# #+end_resumen
-
-# #+begin_abstract
-#   It is shown how to use the /Python/ programming language in order to
-#   get graphical representations of time series. Furthermore, /Python/
-#   is used to study the concept of the visibility graph of a time
-#   series. The examples shown here could be useful in other contexts
-#   where programming may be applied in scientific problems.
-# #+end_abstract
+#+beamer_header: \languagepath{spanish}
+#+beamer_header: \beamerdefaultoverlayspecification{<+->}
 
 * Introducción
 
 ** 
-   Una /serie de tiempo/ es una sucesión de datos \(X=\{x_{t}\}\),
-   donde la variable \(t\) toma valores uniformemente espaciados en el
-   tiempo. El valor \(x_{t}\) se interpreta como el valor que toma una
-   cantidad a estudiar en el tiempo \(t\).  Existen diversas
-   aplicaciones de las series de tiempo en la economía, por ejemplo:
-   describiendo los volúmenes de venta de un producto a lo largo del
-   tiempo, a la demografía: estudiando cambios en una cierta
-   población, a la sociología, meteorología, etc. En este artículo y
-   para simplificar la discusión, supondremos sin perder generalidad
-   que la variable \(t\) toma valores en los enteros no negativos:
-   \(0,1,2,3,\ldots\).
+   - Una /serie de tiempo/ es una sucesión de datos \(X=\{x_{t}\}\),
+     donde la variable \(t\) toma valores uniformemente espaciados en
+     el tiempo. El valor \(x_{t}\) se interpreta como el valor que toma una
+     cantidad a estudiar en el tiempo \(t\).
+   - Existen diversas aplicaciones de las series de tiempo en la
+     economía, por ejemplo: describiendo los volúmenes de venta de un
+     producto a lo largo del tiempo, a la demografía: estudiando
+     cambios en una cierta población, a la sociología, meteorología,
+     etc.
+   - En este trabajo para simplificar la discusión, supondremos sin
+     perder generalidad que la variable \(t\) toma valores en los
+     enteros no negativos: \(0,1,2,3,\ldots\).
 
 ** 
 
-   /Python/ es un lenguaje de programación moderno, el cual puede
-   obtenerse legalmente de internet de manera gratuita. El lenguaje
-   /Python/ se presta de manera natural a las aplicaciones a la
-   ciencia. En este trabajo mostraremos el uso de sus librerías
-   =matplotlib= (la cual sirve para producir dibujos científicos) y
-   =networkx= (la cual ayuda a manipular y dibujar redes complejas).
+   - /Python/ es un lenguaje de programación moderno, el cual puede
+     obtenerse legalmente de internet de manera gratuita. El lenguaje
+     /Python/ se presta de manera natural a las aplicaciones a la
+     ciencia.
+   - En este trabajo mostraremos el uso de sus librerías =matplotlib=
+     (la cual sirve para producir dibujos científicos) y =networkx=
+     (la cual ayuda a manipular y dibujar redes complejas).
 
 ** 
    Como primer ejemplo, en la figura \ref{simple2} mostramos el código
@@ -92,13 +82,13 @@ plt.show()
    #+RESULTS[3052e122f910ca3fd6a299bf1c3d8572fd2f0444]: simple01
    [[file:./simple.png]]
 
-   #+call: final-mp(labl="simple2", capt="Una serie de tiempo sencilla")
+   #+call: final-mp(labl="simple2", capt="")
    
-
 ** 
    En la última parte de esta presentación, utilizaremos el concepto
    de gráfica de visibilidad para proporcionarnos un ejemplo no
    trivial del uso de /Python/.
+
 
 * El lenguaje Python
 
