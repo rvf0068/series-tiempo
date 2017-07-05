@@ -1,6 +1,6 @@
-#+title: Visualización de series de tiempo en Python
-#+author: {{{erika}}}{{{newline}}} {{{margarita}}}{{{newline}}} {{{rafael}}}
-#+date: 6 de julio de 2017
+#+title: Visualización de series de tiempo {{{newline}}} en Python
+#+author: {{{erika}}}{{{newline}}} {{{margarita}}}{{{newline}}} {{{rafael}}}{{{newline}}}
+#+date: @@latex:\protect\tiny@@ 6 de julio de 2017
 
 #+macro: newline @@latex:\\[0.6em]@@ @@html:<br>@@
 #+macro: aamf Área Académica de Matemáticas y Física
@@ -18,6 +18,8 @@
 #+options: ':t toc:nil H:2
 
 #+latex_class: beamer-talk
+#+startup: beamer
+#+beamer_theme: metropolis [numbering=none, block=fill]
 
 #+latex_header: \usepackage{xcolor}
 #+latex_header: \usepackage{url}
@@ -37,38 +39,39 @@
 
 * Introducción
 
-** 
+** Series de tiempo
+
    - Una /serie de tiempo/ es una sucesión de datos \(X=\{x_{t}\}\),
      donde la variable \(t\) toma valores uniformemente espaciados en
      el tiempo. El valor \(x_{t}\) se interpreta como el valor que toma una
      cantidad a estudiar en el tiempo \(t\).
-   - Existen diversas aplicaciones de las series de tiempo en la
-     economía, por ejemplo: describiendo los volúmenes de venta de un
-     producto a lo largo del tiempo, a la demografía: estudiando
-     cambios en una cierta población, a la sociología, meteorología,
-     etc.
    - En este trabajo para simplificar la discusión, supondremos sin
      perder generalidad que la variable \(t\) toma valores en los
      enteros no negativos: \(0,1,2,3,\ldots\).
 
-** 
+** Python
 
    - /Python/ es un lenguaje de programación moderno, el cual puede
      obtenerse legalmente de internet de manera gratuita. El lenguaje
      /Python/ se presta de manera natural a las aplicaciones a la
      ciencia.
+
+   #+beamer: \pause
+
    - En este trabajo mostraremos el uso de sus librerías =matplotlib=
      (la cual sirve para producir dibujos científicos) y =networkx=
      (la cual ayuda a manipular y dibujar redes complejas).
 
-** 
-   Como primer ejemplo, en la figura \ref{simple2} mostramos el código
-   para producir una representación gráfica de la serie de tiempo
-   =[2,3,10,2,4,5]=, usando =matplotlib=.
+** =matplotlib=
 
-   #+call: inicio-mp(diam="0.6")
+   Como primer ejemplo, mostramos el código para producir una
+   representación gráfica de la serie de tiempo =[2,3,10,2,4,5]=,
+   usando =matplotlib=.
+
+   #+call: inicio-mp(diam="0.485")
 
    #+name: simple01
+   #+ATTR_LATEX: :options basicstyle=\scriptsize\ttfamily
    #+BEGIN_SRC ipython :session :file ./simple.png :exports both
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
@@ -77,62 +80,66 @@ plt.plot(y)
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.35")
+   #+call: enmedio-mp(ndiam="0.5")
 
    #+RESULTS[3052e122f910ca3fd6a299bf1c3d8572fd2f0444]: simple01
    [[file:./simple.png]]
 
    #+call: final-mp(labl="simple2", capt="")
    
-** 
+** Gráfica de visibilidad 
+
    En la última parte de esta presentación, utilizaremos el concepto
    de gráfica de visibilidad para proporcionarnos un ejemplo no
    trivial del uso de /Python/.
 
-
 * El lenguaje Python
 
-** 
-  El lenguaje /Python/ puede descargarse de su sitio
-  oficial: https://www.python.org, para diversos sistemas operativos,
-  incluyendo Windows™ y MacOS™. En Ubuntu y otras varias
-  distribuciones de Linux, /Python/ viene preinstalado, sin embargo,
-  en los ejemplos mostrados en este artículo, además se necesitan los
-  paquetes =python-matplotlib= y =python-networkx=. Hay excelentes
-  textos introductorios.
+** Instalación
 
-** 
-  /Python/ tiene las estructuras de datos básicas, como las listas y
-  los enteros. Por ejemplo, la segunda línea en la figura \ref{simple2}
-  asigna a la variable =y= la lista de enteros =[2,3,10,2,4,5]=, que
-  en este caso la estamos interpretando como una serie de tiempo.
+   - El lenguaje /Python/ puede descargarse de su sitio
+     oficial: https://www.python.org, para diversos sistemas operativos,
+     incluyendo Windows™ y MacOS™.
+   - También puede obtenerse la distribución Anaconda™, la cual está
+     ya adaptada para el trabajo científico, de la página
+     https://www.continuum.io/.
+   - En Ubuntu y otras varias distribuciones de Linux, /Python/ viene
+     preinstalado.
 
-  En /Python/ existen muchísimas librerías que extienden la capacidad
-  del lenguaje. Como ejemplo, mencionamos la librería =matplotlib=
-  (https://matplotlib.org), la cual se invoca en la primer línea de la
-  figura \ref{simple2}. La instrucción =import matplotlib.pyplot as
-  plt= sirve para poder usar en nuestro programa una sintaxis similar
-  a la de MATLAB™.
+** Librerías 
 
-** 
-  Los dos siguientes renglones modifican un objeto gráfico. Con
-  =plt.grid(True)= se superpone una cuadrícula en la gráfica, y con
-  =plt.plot(y)= se añaden las líneas correspondientes a la serie de
-  tiempo dada por la lista =y=. Finalmente, con =plt.show()= se
-  muestra el dibujo así formado. 
-** 
+  - /Python/ tiene las estructuras de datos básicas, como las listas y
+    los enteros. Por ejemplo, en el código anterior se asigna a la
+    variable =y= la lista de enteros =[2,3,10,2,4,5]=, que en este
+    caso la estamos interpretando como una serie de tiempo.
 
-  En la figura \ref{simple2} hemos demostrado que, aunque /Python/ es
-  un lenguaje muy complejo, no es necesario usar toda su complejidad
-  para empezar a usarlo. Vamos a dar un ejemplo ligeramente más
-  complicado, el cual nos será útil en adelante. Para el propósito de
-  definir la gráfica de visibilidad, será conveniente usar barras para
-  indicar los valores de la serie de tiempo, como se muestra en la
-  figura \ref{simple02}.
+    #+ATTR_LATEX: :options basicstyle=\footnotesize\ttfamily
+    #+BEGIN_SRC ipython :noweb yes :exports code
+<<simple01>>
+    #+END_SRC
 
-   #+call: inicio-mp(diam="0.5")
+    #+beamer: \pause
+
+  - En /Python/ existen muchísimas librerías que extienden la
+    capacidad del lenguaje. Como ejemplo, mencionamos la librería
+    =matplotlib= (https://matplotlib.org).
+
+** Python no es difícil
+
+  - En el dibujo anterior hemos demostrado que, aunque /Python/ es
+    un lenguaje muy complejo, no es necesario usar toda su complejidad
+    para empezar a usarlo.
+  - Vamos a dar un ejemplo ligeramente más complicado, el cual nos
+    será útil en adelante. Para el propósito de definir la gráfica de
+    visibilidad, será conveniente usar barras para indicar los valores
+    de la serie de tiempo.
+
+** Histograma
+
+   #+call: inicio-mp(diam="0.485")
 
    #+name: simple02
+   #+ATTR_LATEX: :options basicstyle=\scriptsize\ttfamily
    #+BEGIN_SRC ipython :session :file ./simple02.png :exports both
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
@@ -144,69 +151,65 @@ plt.bar(range(len(y)),
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.45")
+   #+call: enmedio-mp(ndiam="0.5")
 
    #+RESULTS[0e40b020f1177d43ab1a00d9b559b6e73a5cec66]: simple02
    [[file:./simple02.png]]
 
-   #+call: final-mp(labl="simple02", capt="Serie de tiempo usando barras")
+   #+call: final-mp(labl="simple02", capt="")
 
 * Gráficas
 
-** El concepto matemático
+** El concepto matemático de gráfica
 
-  Una *gráfica* \(G\), como concepto matemático, se compone de un
-  conjunto de puntos, denotado con \(V(G)\), a cuyos elementos se les
-  llama *vértices*; y de un conjunto de parejas no ordenadas de
-  vértices, denotado con \(E(G)\), a cuyos elementos se les llama
-  *aristas*. En las aplicaciones, se le suele llamar *nodos* a los
-  vértices, y a las gráficas se les llega a llamar *grafos* y también
-  *redes complejas*. Si los vértices \(v_{1}\), \(v_{2}\) son tales
-  que \(\{v_{1},v_{2}\}\in E(G)\), decimos que \(v_{1}\) y \(v_{2}\)
-  son *adyacentes*.
+  - Una *gráfica* \(G\) se compone de
+    - un conjunto, denotado con \(V(G)\), a cuyos elementos se les
+      llama *vértices*, y de
+    - un conjunto de parejas no ordenadas de vértices, denotado con
+      \(E(G)\), a cuyos elementos se les llama *aristas*.
+  - En las aplicaciones, se le suele llamar a las gráficas *grafos* y
+    también *redes* o *redes complejas*. A los vértices se les llega a
+    llamar *nodos*.
+  - Si los vértices \(v_{1}\), \(v_{2}\) son tales que
+    \(\{v_{1},v_{2}\}\in E(G)\), decimos que \(v_{1}\) y \(v_{2}\) son
+    *adyacentes*.
 
-** 
-  Si \(v\) es un vértice de la gráfica \(G\), a la cantidad de aristas
-  que contienen a \(v\) se le llama el *grado* de \(v\). La cantidad
-  \(\Delta(G)=\max\{\mathrm{grado}(v)\mid v\in V(G)\}\) es el *grado
-  máximo* de la gráfica. Se dice que una gráfica es *regular* si todos
-  los vértices tienen el mismo grado. La sucesión
-  \((d_{0},d_{1},\ldots,d_{\Delta(G)})\), donde \(d_{i}\) es la
-  cantidad de vértices de \(G\) de grado \(i\), es el *histograma de
-  grados* de \(G\). El histograma de grados ha sido empleado como un
-  parámetro que permite detectar propiedades de la gráfica
-  \(G\). Existen muchas otros parámetros de las gráficas dignos de
-  estudiarse, que se pueden consultar en un texto de teoría de
-  gráficas. 
-** 
-  Como ejemplo, podemos definir una gráfica \(P\), cuyo conjunto de
-  vértices es \(V(P)=\{a,b,c\}\), y cuyo conjunto de aristas es
-  \(E(P)=\{\{a,b\},\{b,c\}\}\). La gráfica \(P\) no es regular, pues
-  los vértices \(a\) y \(c\) tienen grado 1, mientras que el vértice
-  \(b\) tiene grado \(2\). De este modo, \(\Delta(P)=2\) y el
-  histograma de grados es \((0,2,1)\), pues hay cero vértices de grado 0,
-  dos de grado 1 y uno de grado 2.
+** Grado de un vértice
+
+  - Si \(v\) es un vértice de la gráfica \(G\), a la cantidad de aristas
+    que contienen a \(v\) se le llama el *grado* de \(v\). La cantidad
+    \(\Delta(G)=\max\{\mathrm{grado}(v)\mid v\in V(G)\}\) es el *grado
+    máximo* de la gráfica.
+  - La sucesión
+    \((d_{0},d_{1},\ldots,d_{\Delta(G)})\), donde \(d_{i}\) es la
+    cantidad de vértices de \(G\) de grado \(i\), es el *histograma de
+    grados* de \(G\).
+  - El histograma de grados ha sido empleado como un parámetro que
+    permite detectar propiedades de la gráfica \(G\). Existen muchas
+    otros parámetros de las gráficas dignos de estudiarse, que se
+    pueden consultar en un texto de teoría de gráficas.
+
+** Ejemplo de gráfica
+
+  - Como ejemplo, podemos definir una gráfica \(P\), cuyo conjunto de
+    vértices es \(V(P)=\{a,b,c\}\), y cuyo conjunto de aristas es
+    \(E(P)=\{\{a,b\},\{b,c\}\}\). 
+  - Los vértices \(a\) y \(c\) tienen grado 1, mientras que el vértice
+    \(b\) tiene grado \(2\).
+  - De este modo, \(\Delta(P)=2\) y el histograma de grados
+    es \((0,2,1)\), pues hay cero vértices de grado 0, dos de grado 1
+    y uno de grado 2.
 
 ** Gráficas en Python
 
-  En la figura \ref{graficav00} se muestra un dibujo de la gráfica
-  \(P\), que definimos en el párrafo anterior, hecho con /Python/ y
-  las librerías =matplotlib= y =networkx= (la página web de =networkx=
-  se encuentra en https://networkx.github.io/). Como se aprecia en el
-  código, después de declarar que queremos usar =networkx= con la
-  instrucción =import networkx as nx=, podemos usar las funciones
-  =nx.Graph= para crear una gráfica y =nx.draw= para crear un dibujo,
-  que como antes, se muestra con =plt.show()=. Notemos que, en este
-  caso, hemos creado una gráfica por medio de la función =nx.Graph=,
-  dando como argumento la lista de aristas de la gráfica a
-  considerar. Existen otras maneras de crear gráficas, las cuales se
-  pueden consultar en la documentación de =networkx=.
+  En la figura se muestra un dibujo de la gráfica \(P\), que definimos
+  en el párrafo anterior, hecho con /Python/ y las librerías
+  =matplotlib= y =networkx=
 
-** 
-
-   #+call: inicio-mp(diam="0.5")
+   #+call: inicio-mp(diam="0.6")
 
    #+name: graficav00
+   #+ATTR_LATEX: :options basicstyle=\scriptsize\ttfamily
    #+BEGIN_SRC ipython :session :file ./graficav00.png :exports both
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -215,17 +218,19 @@ nx.draw(P,with_labels=True)
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.45")
+   #+call: enmedio-mp(ndiam="0.385")
 
    #+RESULTS[7e8510728c4ba47a6ee433d2e1dd43371593e03f]: graficav00
    [[file:./graficav00.png]]
 
    #+call: final-mp(labl="graficav00", capt="Gráfica $P$")
 
-** 
+** Propiedades de gráficas
 
-   Una vez que la gráfica ha sido creada en Python, es posible usar la
-   computadora para obtener propiedades de la gráfica. Por ejemplo:
+   #+beamer: \vspace*{5mm}
+
+   Una vez que la gráfica ha sido creada en Python, es posible obtener
+   propiedades de la gráfica. Por ejemplo:
 
    #+BEGIN_SRC ipython :session :exports code
 P.nodes()   
@@ -244,7 +249,7 @@ print P.nodes()
    #+RESULTS[7851ad5f58f2eed03ecfc485c83d5ceae95bd918]: vertices
    : ['a', 'c', 'b']
 
-
+   #+beamer: \pause
    mientras que:
 
    #+name: grado
@@ -261,24 +266,8 @@ P.degree('b')
 
    En =networkx= no existe ya definida una función para calcular el
    grado máximo de una gráfica. Sin embargo, no es difícil obtener tal
-   parámetro si tenemos en cuenta que:
-
-   - =P.nodes= es la lista de vértices de la gráfica =P=, como
-     usamos antes.
-   - Si =l= es una lista de vértices, =P.degree(l)= nos da una
-     estructura de datos que incluye la información de los grados de
-     cada vértice en =l=.
-   - Con =P.degree(P.nodes())= obtenemos la información de todos los
-     grados de todos los vértices de =P=. Pero para obtener una lista
-     con únicamente los grados y no los vértices, usaremos la instrucción
-     =P.degree(P.nodes()).values()=.
-   - El grado máximo de la gráfica =P= se obtiene entonces con:
-     =max(P.degree(P.nodes()).values())=.
-
-** 
-   
-   Lo anterior se puede aplicar de manera práctica definiendo una
-   nueva función, digamos =grado_max=, del siguiente modo:
+   parámetro por medio de una nueva función, digamos =grado_max=, del
+   siguiente modo:
 
    #+BEGIN_SRC ipython :session :exports code
 def grado_max(G):
@@ -302,32 +291,28 @@ grado_max(P)
 
 ** Gráfica de visibilidad 
 
+   - Lacasa y otros introdujeron en 2008 la *gráfica de visibilidad
+     asociada a una serie de tiempo* como una herramienta para
+     analizar diversas propiedades de la serie.
+   - Los autores observan, por ejemplo, que si la serie de tiempo es
+     periódica, entonces la gráfica de visibilidad tiene cierta regularidad.
+   - Por otro lado, también observan que la gráfica de visibilidad
+     permanece invariante bajo ciertos cambios no esenciales de la
+     serie de tiempo, como traslación o reescalamientos.
 
-   En el artículo [[citep:MR2403096]], los autores introducen la
-   gráfica de visibilidad asociada a una serie de tiempo como una
-   herramienta para analizar diversas propiedades de la serie, usando
-   las técnicas y la terminología de la teoría de las gráficas. Los
-   autores observan, por ejemplo, que si la serie de tiempo es
-   periódica, entonces la gráfica de visibilidad es regular. Por otro
-   lado, también observan que la gráfica de visibilidad permanece
-   invariante bajo ciertos cambios no esenciales de la serie de
-   tiempo, como traslación o reescalamientos. 
+** Adyacencias en la gráfica de visibilidad
 
-** 
-
-   La gráfica de visibilidad tiene como vértices los datos de la serie
-   de tiempo, de tal modo que por la suposición que hicimos al
-   principio, en el caso de que haya \(n\) datos, los vértices pueden
-   tomarse como \(V=\{0,1,2,\ldots,n-1\}\). Se declaran adyacentes
-   entre sí aquellos datos tales que, en el dibujo de la serie de
-   tiempo, las partes superiores de sus barras correspondientes sean
-   "visibles" entre sí considerando a las barras como "paredes". En la
-   figura \ref{adyacentes} se muestra un ejemplo concreto.
+   - La gráfica de visibilidad tiene como vértices los datos de la
+     serie de tiempo, por lo quepueden tomarse como
+     \(V=\{0,1,2,\ldots,n-1\}\).
+   - Se declaran adyacentes entre sí aquellos datos tales que, las
+     partes superiores de sus barras correspondientes sean "visibles"
+     entre sí considerando a las barras como "paredes".
+     #+beamer: \pause
 
    #+call: inicio-mp(diam="0.45")
    
    #+name: barras-adyacentes
-   #+header: :noweb yes
    #+BEGIN_SRC ipython :session :file ./barras-adyacentes.png :exports results
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
@@ -347,7 +332,6 @@ plt.show()
    #+call: enmedio-mp(ndiam="0.45")
    
    #+name: barras-no-adyacentes
-   #+header: :noweb yes
    #+BEGIN_SRC ipython :session :file ./barras-no-adyacentes.png :exports results
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
@@ -363,21 +347,27 @@ plt.show()
    
    #+RESULTS[deababa4955fa136760908bdcfc802e684b5f94c]: barras-no-adyacentes
    [[file:./barras-no-adyacentes.png]]
-
    
-   #+call: final-mp(labl="adyacentes", capt="Relación de adyacencia en la gráfica de visibilidad")
+   #+call: final-mp(labl="adyacentes", capt="")
 
 ** 
 
+   #+beamer: \vspace*{0.4cm}
+   
    Es inmediato entonces determinar la lista completa de las aristas
    de la gráfica de visibilidad de la serie de tiempo
    =[2,3,10,2,4,5]=, y usando =networkx=, realizar un dibujo de la
-   gráfica. El dibujo junto con el código para producirlo se muestra
-   en la figura \ref{grafica01}.
+   gráfica. 
 
-   #+call: inicio-mp(diam="0.5")
+   #+ATTR_LATEX: :width 4cm
+   [[file:simple02.png]]
+
+   #+beamer: \vspace*{-0.72cm}
+
+   #+call: inicio-mp(diam="0.385")
 
    #+name: grafica01
+   #+ATTR_LATEX: :options basicstyle=\tiny\ttfamily
    #+BEGIN_SRC ipython :session :file ./grafica01.png :exports both
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -388,47 +378,34 @@ nx.draw(G,with_labels=True)
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.45")
+   #+call: enmedio-mp(ndiam="0.6")
 
    #+RESULTS[a9739243f9836b683766704e76d2fbc716658278]: grafica01
    [[file:./grafica01.png]]
 
-   #+call: final-mp(labl="grafica01", capt="Gráfica de visibilidad")
-
-** 
-
-   En este caso, puesto que la serie de tiempo considerada tiene pocos
-   datos, es factible enumerar explícitamente las aristas de la
-   gráfica de visibilidad simplemente usando el dibujo de la serie de
-   tiempo. En las siguientes secciones mostraremos el modo en que
-   /Python/ nos puede ayudar para estudiar series de tiempo más
-   complicadas.
+   #+call: final-mp(labl="grafica01", capt="")
 
 ** Definición formal de la gráfica de visibilidad
    
-   Determinar si dos datos son adyacentes en la gráfica de visibilidad
-   de manera formal es un ejercicio de geometría analítica.
-   Se tiene que los datos
-   \((t_{a},y_{a})\), \((t_{b},y_{b})\) se declaran adyacentes en la
-   gráfica de visibilidad siempre y cuando se tenga que para todos los
-   \(t_{c}\) con \(t_{a}<t_{c}<t_{b}\) se cumple que:
-   \begin{equation}
-   \label{eq:1}
+   Los datos \((t_{a},y_{a})\), \((t_{b},y_{b})\) se declaran
+   adyacentes en la gráfica de visibilidad siempre y cuando se tenga
+   que para todos los \(t_{c}\) con \(t_{a}<t_{c}<t_{b}\) se cumple
+   que:
+   \begin{equation*}
    y_{c}<y_{b}+(y_{a}-y_{b})\frac{t_{b}-t_{c}}{t_{b}-t_{a}}.
-   \end{equation}
+   \end{equation*}
 
-** 
+** Función de visibilidad
 
    En /Python/, podemos definir una función que determine si, dada una
    serie de tiempo y dos datos, tales datos son adyacentes en la
-   gráfica de visibilidad de la serie de tiempo.  En el
-   listado [[adyacencia]] se define tal función. La función =is_visible=
-   regresa =True= si los datos =a=, =b= son adyacentes y =False= si
-   no.
+   gráfica de visibilidad de la serie de tiempo. 
 
-   #+caption: Función de adyacencia
+   La función =is_visible= regresa =True= si los datos =a=, =b= son
+   adyacentes y =False= si no.
+
    #+name: adyacencia
-   #+attr_latex: :options captionpos=b
+   #+attr_latex: :options basicstyle=\footnotesize\ttfamily
    #+BEGIN_SRC ipython :session :exports code
 def is_visible(y,a,b):
     isit = True
@@ -441,20 +418,13 @@ def is_visible(y,a,b):
 
    #+RESULTS[e109d6118b51b78ddf2e44fee3676dc3efb4a7e0]: adyacencia
 
-** 
-   Por otro lado, en el listado [[gravisibilidad]] se muestra el código
-   para definir la gráfica de visibilidad de una serie de tiempo,
-   usando la función =is_visible= del listado [[adyacencia]]. En este
-   caso, se usa una variable llamada =eds= para colectar las aristas
-   en una lista. Para cada dato =a= en la serie de tiempo y cada =b=
-   que sea mayor que =a= se determina si =b= es visible desde =a=, y
-   solo en el caso de que así sea se añade la arista =(a,b)= a la
-   lista =eds=. La función =visibility_graph= regresa finalmente la
-   gráfica de visibilidad de la serie de tiempo =ts=. 
+** Función de gráfica de visibilidad
 
-   #+caption: Gráfica de visibilidad
+   Se usa la función =is_visible= anterior.
+
+   #+beamer: \bigskip
+
    #+name: gravisibilidad
-   #+attr_latex: :options captionpos=b
    #+BEGIN_SRC ipython :session :exports code
 def visibility_graph(ts):
     eds = []
@@ -467,52 +437,55 @@ def visibility_graph(ts):
 
    #+RESULTS[00b727796470957c96df25fb3e15392d6f4106b4]: gravisibilidad
 
-** 
+** Varios tipos de gráficas de visibilidad
 
-   Recientemente se han definido, (y estudiado y aplicado) variantes
-   de la gráfica de visibilidad, como la gráfica de visibilidad
-   horizontal, la gráfica de visibilidas con pesos, y la gráfica de
-   visibilidad paramétrica. El código que hemos presentado en el
-   listado [[adyacencia]] que determina si dos datos son visibles para la
-   gráfica de visibilidad "natural" podría adaptarse sin muchos
-   problemas para considerar las otras definiciones de visibilidad.
+   - Recientemente se han definido, (y estudiado y aplicado) variantes
+     de la gráfica de visibilidad, como:
+     - la gráfica de visibilidad horizontal,
+     - la gráfica de visibilidas con pesos,
+     - la gráfica de visibilidad paramétrica. 
 
-   En la siguiente sección aplicaremos este código a una serie de
-   tiempo mucho más complicada.
+   - El código que hemos presentado podría adaptarse sin muchos
+     problemas para considerar las otras definiciones de visibilidad.
+
+   - En la siguiente sección aplicaremos este código a una serie de
+     tiempo mucho más complicada.
 
 * El mapeo logístico
 
-** 
-  Una manera sencilla de obtener una serie de tiempo en un conjunto de
-  números reales \(X\), es por medio de las iteraciones de una función
-  \(f\colon X\to X\). Para construir una serie de tiempo de tal modo,
-  se toma una condición inicial \(x_{0}\in X\), y los datos
-  subsiguientes se definen recursivamente para \(t>0\) como
-  \(x_{t}=f(x_{t-1})\). 
+** Serie de tiempo por iteraciones
 
-** 
+  - Una manera sencilla de obtener una serie de tiempo en un conjunto de
+    números reales \(X\), es por medio de las iteraciones de una función
+    \(f\colon X\to X\).
+  - Para construir una serie de tiempo de tal modo, se toma una
+    condición inicial \(x_{0}\in X\), y los datos subsiguientes se
+    definen recursivamente para \(t>0\) como \(x_{t}=f(x_{t-1})\).
+  - Uno de las casos más estudiados, es el *mapeo logístico*, en el cual
+    se toma \(X=[0,1]\), es decir, el intervalo de números reales entre
+    \(0\) y \(1\), y la función \(f(x)=\mu x(1-x)\), donde \(\mu\)
+    satisface \(0\leq \mu\leq 4\).
+  - Se sabe que
+    para ciertos valores de \(\mu\) las iteraciones muestran el fenómeno
+    de *caos*.
 
-  Uno de las casos más estudiados, es el *mapeo logístico*, en el cual
-  se toma \(X=[0,1]\), es decir, el intervalo de números reales entre
-  \(0\) y \(1\), y la función \(f(x)=\mu x(1-x)\), donde \(\mu\)
-  satisface \(0\leq \mu\leq 4\). Se demuestra en cite:MR1046376, que
-  para ciertos valores de \(\mu\) las iteraciones muestran el fenómeno
-  de *caos*. En la figura \ref{logistico01} se dibuja la serie de
-  tiempo obtenida con condición inicial \(x_{0}=0.3\), valor del
-  parámetro \(\mu=3.8\), y con 50 iteraciones. En este caso, la serie
-  de tiempo queda guardada en una lista llamada =vals=.
+** Serie de tiempo del mapeo logístico
 
-** 
+  Se dibuja la serie de tiempo obtenida con condición inicial
+  \(x_{0}=0.3\), valor del parámetro \(\mu=3.8\), y con 50
+  iteraciones. En este caso, la serie de tiempo queda guardada en una
+  lista llamada =vals=.
 
-   #+call: inicio-mp(diam="0.5")
+   #+call: inicio-mp(diam="0.385")
 
    #+name: logistico01
+   #+ATTR_LATEX: :options basicstyle=\tiny\ttfamily
    #+BEGIN_SRC ipython :session :file ./logistico01.png :exports both
 import matplotlib.pyplot as plt
 def f(x):
     return 3.8*x*(1-x)
 vals=[0.3]
-iteraciones=100
+iteraciones=50
 for i in range(iteraciones):
     new = vals[-1]
     vals.append(f(new))
@@ -526,63 +499,46 @@ plt.bar(range(len(vals)),
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.45")
+   #+call: enmedio-mp(ndiam="0.6")
 
-   #+RESULTS[add43ebae36f468e9e0503a81539d552663218db]: logistico01
+   #+RESULTS[9a590d7428a1d3c7d80418eb6d18c37eb45758cd]: logistico01
    [[file:./logistico01.png]]
 
-   #+call: final-mp(labl="logistico01", capt="El mapeo logístico")
+   #+call: final-mp(labl="logistico01", capt="")
 
-** 
+** Gráfica de la serie de tiempo logística
 
-   Dado que, en el código de la figura \ref{logistico01}, además de
-   producir el dibujo, se crea una lista =vals=, que contiente los
-   datos de la serie de tiempo, en la figura \ref{graficav01} se puede
-   utilizar tal lista para obtener la gráfica de visibilidad de la
-   serie de tiempo que se originó con las iteraciones del mapeo
-   logístico.
+   Se puede ahora utilizar la lista =vals= para obtener la gráfica de
+   visibilidad de la serie de tiempo que se originó con las
+   iteraciones del mapeo logístico.
 
-** 
-
-   #+call: inicio-mp(diam="0.5")
+   #+call: inicio-mp(diam="0.3")
 
    #+name: graficav01
+   #+ATTR_LATEX: :options basicstyle=\tiny\ttfamily
    #+BEGIN_SRC ipython :session :file ./graficav01.png :exports both
 import matplotlib.pyplot as plt
 import networkx as nx
-from networkx.drawing.nx_agraph import graphviz_layout
 
 G=visibility_graph(vals)
-#nx.draw(G,with_labels=True,pos=graphviz_layout(G))
-nx.draw(G,with_labels=True)
+nx.draw(G,
+        with_labels=True)
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.45")
+   #+call: enmedio-mp(ndiam="0.685")
 
-   #+RESULTS[ccaf6a888377afb95eb2b628fe5d9760e856415f]: graficav01
+   #+RESULTS[968853b9eb5fb03e6e62a8883d4cc66e25e03a45]: graficav01
    [[file:./graficav01.png]]
 
-   #+call: final-mp(labl="graficav01", capt="Gráfica de visibilidad")
+   #+call: final-mp(labl="graficav01", capt="")
 
-** 
+** Histograma de grados
 
-   En la figura \ref{histograma01} se muestra el histograma de los
-   grados de la gráfica anterior. En la literatura, la distribución de
-   los grados de los vértices es la principal herramienta para
-   estudiar la gráfica de visibilidad, en especial en casos como este,
-   en que la gráfica tiene demasiados vértices. Por ejemplo, los
-   autores de (cite:luque09) distinguen el caso en que los datos de la
-   serie de tiempo se obtienen de manera aleatoria, del caso caótico
-   como el que consideramos en la presente sección. 
-** 
-   Los autores del presente trabajo estudiarán en el futuro el efecto
-   de perturbaciones en series de tiempo que provienen de fenómenos
-   biológicos, por medio de las herramientas aquí expuestas.
-
-   #+call: inicio-mp(diam="0.5")
+   #+call: inicio-mp(diam="0.385")
 
    #+name: histograma01
+   #+ATTR_LATEX: :options basicstyle=\tiny\ttfamily
    #+BEGIN_SRC ipython :session :file ./histograma01.png :exports both
 import numpy as np 
 degs = list(G.degree().values())
@@ -599,12 +555,21 @@ plt.grid(True)
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.45")
+   #+call: enmedio-mp(ndiam="0.6")
 
    #+RESULTS[db02291a1530f50384531ac37dc564c28c294a68]: histograma01
    [[file:./histograma01.png]]
 
-   #+call: final-mp(labl="histograma01", capt="Histograma de grados")
+   #+call: final-mp(labl="histograma01", capt="")
+
+* Conclusión
+
+** Fin
+
+   Los autores del presente trabajo estudiarán en el futuro el efecto
+   de perturbaciones en series de tiempo que provienen de fenómenos
+   biológicos, por medio de las herramientas aquí expuestas.
+
 
 * COMMENT Gráfica aleatoria
 
@@ -780,8 +745,7 @@ plt.show()
 
   #+name: inicio-mp
   #+BEGIN_SRC emacs-lisp :var diam="0.4" :results latex
-(concat "\\begin{figure}[htbp]\n"
-  "\\centering\n"
+(concat "\\begin{center}\n"
   "\\begin{minipage}{"
   diam
   "\\linewidth}\n"
@@ -805,7 +769,8 @@ plt.show()
    "\\label{"
    labl
    "}\n"
-   "\\end{figure}")
+   "\\end{center}\n"
+   )
   #+end_src
 
 #+BEGIN_SRC emacs-lisp
@@ -829,5 +794,4 @@ plt.show()
 
 # Local Variables:
 # org-confirm-babel-evaluate: nil
-# org-ref-default-bibliography: "series.bib"
 # End:
