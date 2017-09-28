@@ -127,7 +127,7 @@
    #+call: inicio-mp(diam="0.6")
 
    #+name: simple01
-   #+BEGIN_SRC ipython :session :file ./simple.png :exports both
+   #+BEGIN_SRC ipython :session :ipyfile ./simple.png :exports both :results raw
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
 plt.grid(True)
@@ -135,9 +135,9 @@ plt.plot(y)
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.35")
+   #+call: enmedio-mp(ndiam="0.4")
 
-   #+RESULTS[3052e122f910ca3fd6a299bf1c3d8572fd2f0444]: simple01
+   #+RESULTS[ab7a01155960be0ee89b35c1daf0133fb8ab4cf8]: simple01
    [[file:./simple.png]]
 
    #+call: final-mp(labl="simple2", capt="Una serie de tiempo sencilla")
@@ -185,7 +185,7 @@ plt.show()
    #+call: inicio-mp(diam="0.5")
 
    #+name: simple02
-   #+BEGIN_SRC ipython :session :file ./simple02.png :exports both
+   #+BEGIN_SRC ipython :session :ipyfile ./simple02.png :exports both :results raw
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
 plt.grid(True)
@@ -198,7 +198,7 @@ plt.show()
 
    #+call: enmedio-mp(ndiam="0.45")
 
-   #+RESULTS[0e40b020f1177d43ab1a00d9b559b6e73a5cec66]: simple02
+   #+RESULTS[b971f1bab77d97e61e5233beb9b70389538bd520]: simple02
    [[file:./simple02.png]]
 
    #+call: final-mp(labl="simple02", capt="Serie de tiempo usando barras")
@@ -255,7 +255,7 @@ plt.show()
    #+call: inicio-mp(diam="0.5")
 
    #+name: graficav00
-   #+BEGIN_SRC ipython :session :file ./graficav00.png :exports both
+   #+BEGIN_SRC ipython :session :ipyfile ./graficav00.png :exports both :results raw
 import matplotlib.pyplot as plt
 import networkx as nx
 P=nx.Graph([('a','b'),('b','c')])
@@ -265,7 +265,7 @@ plt.show()
 
    #+call: enmedio-mp(ndiam="0.45")
 
-   #+RESULTS[7e8510728c4ba47a6ee433d2e1dd43371593e03f]: graficav00
+   #+RESULTS[4c95ce240be5aa3222a75be944319b106f5ce19c]: graficav00
    [[file:./graficav00.png]]
 
    #+call: final-mp(labl="graficav00", capt="Gráfica $P$")
@@ -340,7 +340,7 @@ grado_max(P)
    produce:
 
    #+RESULTS[f9588b7797db04ff11f1634cf938ecdd606f8aeb]: gradomaxfun
-   : 2
+   : : 2
 
 * Aplicación a la gráfica de visibilidad
 
@@ -370,7 +370,7 @@ grado_max(P)
    
    #+name: barras-adyacentes
    #+header: :noweb yes
-   #+BEGIN_SRC ipython :session :file ./barras-adyacentes.png :exports results
+   #+BEGIN_SRC ipython :session :ipyfile ./barras-adyacentes.png :exports results :results raw
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
 plt.grid(True)
@@ -383,14 +383,14 @@ plt.title("0 y 2 son adyacentes", fontsize=20)
 plt.show()
    #+END_SRC
    
-   #+RESULTS[fd48744feeab964a85485c466795eb1d34992e2c]: barras-adyacentes
+   #+RESULTS[be79af661cdf688e66b37dd46c6ba431b8b21648]: barras-adyacentes
    [[file:./barras-adyacentes.png]]
 
    #+call: enmedio-mp(ndiam="0.45")
    
    #+name: barras-no-adyacentes
    #+header: :noweb yes
-   #+BEGIN_SRC ipython :session :file ./barras-no-adyacentes.png :exports results
+   #+BEGIN_SRC ipython :session :ipyfile ./barras-no-adyacentes.png :exports results :results raw
 import matplotlib.pyplot as plt
 y=[2,3,10,2,4,5]
 plt.grid(True)
@@ -403,7 +403,7 @@ plt.title("3 y 5 NO son adyacentes", fontsize=20)
 plt.show()
    #+END_SRC
    
-   #+RESULTS[deababa4955fa136760908bdcfc802e684b5f94c]: barras-no-adyacentes
+   #+RESULTS[4a036353c38a94c49b70f5816af86bc1f51994c5]: barras-no-adyacentes
    [[file:./barras-no-adyacentes.png]]
 
    
@@ -418,7 +418,7 @@ plt.show()
    #+call: inicio-mp(diam="0.5")
 
    #+name: grafica01
-   #+BEGIN_SRC ipython :session :file ./grafica01.png :exports both
+   #+BEGIN_SRC ipython :session :ipyfile ./grafica01.png :exports both :results raw
 import networkx as nx
 import matplotlib.pyplot as plt
 G=nx.Graph([(0,1),(0,2),(1,2),
@@ -430,7 +430,7 @@ plt.show()
 
    #+call: enmedio-mp(ndiam="0.45")
 
-   #+RESULTS[a9739243f9836b683766704e76d2fbc716658278]: grafica01
+   #+RESULTS[7bca355b88deb3d84bab12c20f4730a30d8a58f5]: grafica01
    [[file:./grafica01.png]]
 
    #+call: final-mp(labl="grafica01", capt="Gráfica de visibilidad")
@@ -536,7 +536,7 @@ def visibility_graph(ts):
    #+call: inicio-mp(diam="0.5")
 
    #+name: logistico01
-   #+BEGIN_SRC ipython :session :file ./logistico01.png :exports both
+   #+BEGIN_SRC ipython :session :ipyfile ./logistico01.png :exports both :results raw
 import matplotlib.pyplot as plt
 def f(x):
     return 3.8*x*(1-x)
@@ -557,7 +557,7 @@ plt.show()
 
    #+call: enmedio-mp(ndiam="0.45")
 
-   #+RESULTS[9a590d7428a1d3c7d80418eb6d18c37eb45758cd]: logistico01
+   #+RESULTS[a3c7d0814cd68c8217ffafc2730410649dd437a4]: logistico01
    [[file:./logistico01.png]]
 
    #+call: final-mp(labl="logistico01", capt="El mapeo logístico")
@@ -572,20 +572,19 @@ plt.show()
    #+call: inicio-mp(diam="0.5")
 
    #+name: graficav01
-   #+BEGIN_SRC ipython :session :file ./graficav01.png :exports both
+   #+BEGIN_SRC ipython :session :ipyfile ./graficav01.png :exports both :results raw
 import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
 
 G=visibility_graph(vals)
-#nx.draw(G,with_labels=True,pos=graphviz_layout(G))
 nx.draw(G,with_labels=True)
 plt.show()
    #+END_SRC
 
-   #+call: enmedio-mp(ndiam="0.45")
+   #+call: enmedio-mp(ndiam="0.5")
 
-   #+RESULTS[ccaf6a888377afb95eb2b628fe5d9760e856415f]: graficav01
+   #+RESULTS[2b2fcd74d45d78eab4e94644dae63e887c1ca863]: graficav01
    [[file:./graficav01.png]]
 
    #+call: final-mp(labl="graficav01", capt="Gráfica de visibilidad")
@@ -606,7 +605,7 @@ plt.show()
    #+call: inicio-mp(diam="0.5")
 
    #+name: histograma01
-   #+BEGIN_SRC ipython :session :file ./histograma01.png :exports both
+   #+BEGIN_SRC ipython :session :ipyfile ./histograma01.png :exports both :results raw
 import numpy as np 
 degs = list(G.degree().values())
 dmax=max(degs)
@@ -624,7 +623,7 @@ plt.show()
 
    #+call: enmedio-mp(ndiam="0.45")
 
-   #+RESULTS[db02291a1530f50384531ac37dc564c28c294a68]: histograma01
+   #+RESULTS[69267b8e8402ba895a379c5964dd27106bdc237b]: histograma01
    [[file:./histograma01.png]]
 
    #+call: final-mp(labl="histograma01", capt="Histograma de grados")
@@ -742,7 +741,7 @@ plt.show()
 
   #+name: inicio-mp
   #+BEGIN_SRC emacs-lisp :var diam="0.4" :results latex
-(concat "\\begin{figure}[htbp]\n"
+(concat "\\begin{figure*}[htbp]\n"
   "\\centering\n"
   "\\begin{minipage}{"
   diam
@@ -767,7 +766,7 @@ plt.show()
    "\\label{"
    labl
    "}\n"
-   "\\end{figure}")
+   "\\end{figure*}")
   #+end_src
 
 #+BEGIN_SRC emacs-lisp
