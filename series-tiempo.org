@@ -57,41 +57,47 @@
 
 #+begin_frontmatter
 #+latex: \title{Visualización de series de tiempo en Python}
-#+latex: \author[First]{Erika Elizabeth Rodríguez Torres\corref{cor1}\fnref{label2}}
+#+latex: \author[uaeh]{Erika Elizabeth Rodríguez Torres}
 #+latex: \ead{erikart@uaeh.edu.mx}
 #+latex: 
-#+latex: \author[Second]{Margarita Tetlalmatzi Montiel}
+#+latex: \author[uaeh]{Margarita Tetlalmatzi Montiel}
 #+latex: \ead{tmontiel@uaeh.edu.mx}
 #+latex: 
-#+latex: \author[Third]{Rafael Villarroel Flores}
+#+latex: \author[uaeh]{Rafael Villarroel Flores\corref{cor1}}
 #+latex: \ead{rafaelv@uaeh.edu.mx}
 #+latex: 
-#+latex: \fntext[label2]{Nota al pie para el autor 1}
 #+latex: \cortext[cor1]{Autor en correspondencia.}
 #+latex: 
-#+latex: \address{Área Académica de Matemáticas y Física, Universidad Autónoma del Estado de Hidalgo, Carretera Pachuca-Tulancingo Km. 4.5, Col. Carboneras, C. P. 42184, Mineral de la Reforma, Hgo., México}
-# #+latex: \address[Second]{Área Académica de Matemáticas y Física, UAEH}
-# #+latex: \address[Third]{Área Académica de Matemáticas y Física, UAEH}
+#+latex: \address[uaeh]{Área Académica de Matemáticas y Física, Universidad Autónoma del Estado de Hidalgo, Carretera Pachuca-Tulancingo Km. 4.5, Col. Carboneras, C. P. 42184, Mineral de la Reforma, Hgo., México}
+#+latex: \begin{abstract}
+#+latex:   Se muestra el uso del lenguaje de programación \emph{Python} para obtener
+#+latex:   representaciones gráficas de series de tiempo. Además se usa
+#+latex:   \emph{Python} para estudiar el concepto de la gráfica de visibilidad de
+#+latex:   una serie de tiempo. Los ejemplos mostrados pueden ser útiles en
+#+latex:   otros contextos donde pueda aplicarse la programación en problemas
+#+latex:   científicos.
+#+latex: \end{abstract}
+#+latex: \begin{keyword}
+#+latex: series de tiempo \sep Python \sep graficación.
+#+latex: \end{keyword}
 #+end_frontmatter
 
+# #+begin_resumen
+#   Se muestra el uso del lenguaje de programación /Python/ para obtener
+#   representaciones gráficas de series de tiempo. Además se usa
+#   /Python/ para estudiar el concepto de la gráfica de visibilidad de
+#   una serie de tiempo. Los ejemplos mostrados pueden ser útiles en
+#   otros contextos donde pueda aplicarse la programación en problemas
+#   científicos.
+# #+end_resumen
 
-
-#+begin_resumen
-  Se muestra el uso del lenguaje de programación /Python/ para obtener
-  representaciones gráficas de series de tiempo. Además se usa
-  /Python/ para estudiar el concepto de la gráfica de visibilidad de
-  una serie de tiempo. Los ejemplos mostrados pueden ser útiles en
-  otros contextos donde pueda aplicarse la programación en problemas
-  científicos. 
-#+end_resumen
-
-#+begin_abstract
-  It is shown how to use the /Python/ programming language in order to
-  get graphical representations of time series. Furthermore, /Python/
-  is used to study the concept of the visibility graph of a time
-  series. The examples shown here could be useful in other contexts
-  where programming may be applied in scientific problems.
-#+end_abstract
+# #+begin_abstract
+#   It is shown how to use the /Python/ programming language in order to
+#   get graphical representations of time series. Furthermore, /Python/
+#   is used to study the concept of the visibility graph of a time
+#   series. The examples shown here could be useful in other contexts
+#   where programming may be applied in scientific problems.
+# #+end_abstract
 
 * Introducción
 
@@ -623,8 +629,29 @@ plt.show()
 
    #+call: final-mp(labl="histograma01", capt="Histograma de grados")
 
+* English Summary
+  :PROPERTIES:
+  :UNNUMBERED: t
+  :END:
+
+*Time Series Visualization in Python*
+
+#+latex: \noindent
+*Abstract*
+
+It is shown how to use the /Python/ programming language in order to
+get graphical representations of time series. Furthermore, /Python/
+is used to study the concept of the visibility graph of a time
+series. The examples shown here could be useful in other contexts
+where programming may be applied in scientific problems.
+
 #+latex: \noindent
 /Keywords/: time series, Python, graphing
+
+* Referencias
+  :PROPERTIES:
+  :UNNUMBERED: t
+  :END:
 
 [[bibliographystyle:elsarticle-harv]]
 [[bibliography:series.bib]]
