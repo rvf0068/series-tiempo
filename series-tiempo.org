@@ -1,5 +1,6 @@
-#+title: Time series visualization in Python
-#+author: {{{eert}}}, {{{mtm}}}, {{{rvf}}}
+# #+title: Visualización de series de tiempo en Python
+# #+author: {{{eert}}}, {{{mtm}}}, {{{rvf}}}
+
 
 #+macro: aamf Área Académica de Matemáticas y Física
 #+macro: rafael Rafael Villarroel Flores
@@ -13,12 +14,18 @@
 
 #+language: es
 
-#+options: ':t toc:nil
+#+options: ':t toc:nil author:nil title:nil
 
 #+latex_class: padi
 
 #+latex_header: \usepackage{xcolor}
 #+latex_header: \usepackage{url}
+
+#+latex_header: \usepackage{ecrc_PADI}
+#+latex_header: \usepackage{amsfonts}
+#+latex_header: \usepackage{latexsym}
+#+latex_header: \usepackage{flushend}
+#+latex_header: \usepackage[section]{placeins}
 
 #+latex_header: \usepackage{listings}
 #+latex_header: \lstset{
@@ -30,13 +37,44 @@
 #+latex_header: }
 #+latex_header: \lstalias{ipython}{python}
 
-#+latex_header: \titulo{Visualización de series de tiempo en Python}
+# #+latex_header: \titulo{Visualización de series de tiempo en Python}
 
-#+latex_header: \palabrasclave{series de tiempo, Python, graficación}
+# #+latex_header: \palabrasclave{series de tiempo, Python, graficación}
+# #+latex_header: \keywords{time series, Python, graphing}
 
-#+latex_header: \keywords{time series, Python, graphing}
+#+latex_header: %% set the volume if you know. Otherwise `00'
+#+latex_header: \volume{00}
+#+latex_header: 
+#+latex_header: %% set the starting page if not 1
+#+latex_header: \firstpage{1}
+#+latex_header: 
+#+latex_header: %% Give the name of the journal
+#+latex_header: \journalname{Publicación Semestral P\"{A}DI No. }
+#+latex_header: %% Give the abbreviation of the Journal. Contast the Publisher if in doubt what this is.
+#+latex_header: \jid{ICBI}
 
 #+latex_header: \renewcommand\lstlistingname{Listado}
+
+#+begin_frontmatter
+#+latex: \title{Visualización de series de tiempo en Python}
+#+latex: \author[First]{Erika Elizabeth Rodríguez Torres\corref{cor1}\fnref{label2}}
+#+latex: \ead{erikart@uaeh.edu.mx}
+#+latex: 
+#+latex: \author[Second]{Margarita Tetlalmatzi Montiel}
+#+latex: \ead{tmontiel@uaeh.edu.mx}
+#+latex: 
+#+latex: \author[Third]{Rafael Villarroel Flores}
+#+latex: \ead{rafaelv@uaeh.edu.mx}
+#+latex: 
+#+latex: \fntext[label2]{Nota al pie para el autor 1}
+#+latex: \cortext[cor1]{Autor en correspondencia.}
+#+latex: 
+#+latex: \address{Área Académica de Matemáticas y Física, Universidad Autónoma del Estado de Hidalgo, Carretera Pachuca-Tulancingo Km. 4.5, Col. Carboneras, C. P. 42184, Mineral de la Reforma, Hgo., México}
+# #+latex: \address[Second]{Área Académica de Matemáticas y Física, UAEH}
+# #+latex: \address[Third]{Área Académica de Matemáticas y Física, UAEH}
+#+end_frontmatter
+
+
 
 #+begin_resumen
   Se muestra el uso del lenguaje de programación /Python/ para obtener
@@ -585,8 +623,10 @@ plt.show()
 
    #+call: final-mp(labl="histograma01", capt="Histograma de grados")
 
+#+latex: \noindent
+/Keywords/: time series, Python, graphing
 
-[[bibliographystyle:apalike]]
+[[bibliographystyle:elsarticle-harv]]
 [[bibliography:series.bib]]
 
 
